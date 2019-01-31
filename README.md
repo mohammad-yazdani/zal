@@ -1,1 +1,1 @@
-# zal
+# The Zal Compiler
