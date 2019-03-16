@@ -7,7 +7,11 @@ main()
     std::cout << "Hexer!\n" << std::endl;
     auto parser = new Parser();
 
-    parser->push("afc00008");
+    std::string fetched;
+    while (std::cin >> fetched)
+    {
+        parser->push(fetched);   
+    }
 
     auto parsed = parser->flush();
     for (auto instr : parsed)

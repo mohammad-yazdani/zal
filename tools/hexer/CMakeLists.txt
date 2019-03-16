@@ -16,6 +16,6 @@ add_executable(hexer
         arch/mips/instr/MIPS32Instr_R.h
         arch/mips/instr/MIPS32Instruction.cc
         arch/mips/instr/MIPS32Instruction.h
-        main.cpp
+        main.cc
         Parser.cc
         Parser.h)
