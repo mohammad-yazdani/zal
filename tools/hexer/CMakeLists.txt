@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 include_directories(arch/mips/instr)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ..)
+
 add_executable(hexer
         arch/mips/instr/defs.h
         arch/mips/instr/MIPS32Instr_I.cc

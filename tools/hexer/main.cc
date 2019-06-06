@@ -14,8 +14,9 @@ main()
     }
 
     auto parsed = parser->flush();
-    for (auto instr : parsed)
-        std::cout << instr->prettyPrint() << std::endl;
+    auto len = parsed.size();
+    for (int i = 0; i < len; i++)
+        std::cout << i << " " << parsed[i]->prettyPrint() << std::endl;
 
     delete parser;
     return 0;
