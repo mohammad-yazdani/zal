@@ -1,0 +1,7 @@
+
+# Project exclude paths
+/asm/cmake-build-debug/
+/compile/cmake-build-debug/
+/link/cmake-build-debug/
+/parse/cmake-build-debug/
+/scan/cmake-build-debug/
