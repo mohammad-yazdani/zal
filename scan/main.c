@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <token.h>
 
 int
 main()
 {
-    printf("scan\n");
-    return 0;
+    printf("Zal Scanner!\n");
+    tokenize(stdin);
+	return 0;
 }
