@@ -2,78 +2,67 @@
 
 // TODO : Implement error handling
 
-char **
-tokenize(FILE *read_fd, int *size)
+int is_empty(char c)
 {
-	int readchars = 0, token_chars = 0, empty_row = 0, token_count = 0;
-	int buff_sz = 16, token_meta_sz = 4;
-	char *buff = malloc(buff_sz * sizeof(char)); // 16 chars min
+    return (c == ' ' || c == '\t' || c == '\n');
+}
+
+char **
+tokenize(const char *raw, int size, int *num_tk)
+{
+	int token_count = 0, i = 0;
+	int token_meta_sz = 4;
+    int tk_idx = 0, tk_char_idx = 0, empty = 0;
+
 	int *token_meta = malloc(token_meta_sz * sizeof(int)); // 4 tokens min
 
-	char c;
+    for (i = 0; i < size; i++)
+    {
+        if (token_meta_sz < (token_count * 2))
+        {
+            token_meta_sz = token_meta_sz * 2;
+            token_meta = realloc(token_meta, token_meta_sz * sizeof(int));
+        }
+        if (is_empty(raw[i]))
+        {
+            if (empty) continue;
+            empty = 1;
+            token_count += 1;
+        } else
+        {
+            empty = 0;
+            token_meta[token_count] += 1;
+        }
+    }
 
-	while(EOF != (c = fgetc(read_fd)))
-	{
-		if (readchars > (buff_sz / 2))
-		{
-			buff_sz *= 2;
-			buff = realloc(buff, buff_sz * sizeof(char));
-		}
-		if (token_count > (token_meta_sz / 2))
-		{
-			token_meta_sz *= 2;
-			token_meta = realloc(token_meta, token_meta_sz * sizeof(int));
-		}
-		if (c == ' ' || c == '\t' || c == '\n')
-		{
-			if (empty_row)
-				continue;
-			else
-			{
-				token_meta[token_count] = token_chars;
-				buff[readchars] = '\n';
-				token_chars = 0;
-				empty_row = 1;
-				readchars += 1;
-				token_count += 1;
-			}
-		}
-		else
-		{
-			empty_row = 0;
-			token_chars += 1;
-			buff[readchars] = c;
-			readchars += 1;
-		}
-	}
+    char **token_buff = malloc(token_count * sizeof(char *));
+    i = 0;
+    for (; i < token_count; i++)
+    {
+        int tksz = token_meta[i];
+        token_buff[i] = malloc((tksz + 1) * sizeof(char));
+    }
+    free(token_meta);
 
-
-	char **token_buff = malloc(token_count * sizeof(char *));
-	int i = 0;
-	for (; i < token_count; i++)
+    empty = 0;
+	for (i = 0; i < size; i++)
 	{
-		int tksz = token_meta[i];
-		token_buff[i] = malloc((tksz + 1) * sizeof(char));
-	}
-	int tk_idx = 0, tk_char_idx = 0;
-	for (i = 0; i < readchars; i++)
-	{
-		if (buff[i] == '\n')
+		if (is_empty(raw[i]))
 		{
+		    if (empty) continue;
+		    empty = 1;
 			token_buff[tk_idx][tk_char_idx] = '\0';
 			tk_idx += 1;
 			tk_char_idx = 0;
 		} else
 		{
-			token_buff[tk_idx][tk_char_idx] = buff[i];
+		    empty = 0;
+			token_buff[tk_idx][tk_char_idx] = raw[i];
 			tk_char_idx += 1;
 		}
 	}
 
-	free(buff);
-	free(token_meta);
-
-	*size = token_count;
+	*num_tk = token_count;
 	return token_buff;
 }
 

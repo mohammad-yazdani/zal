@@ -7,7 +7,7 @@ typedef struct min_c_token {
 } Token;
 
 char **
-tokenize(FILE *read_fd, int *size);
+tokenize(const char *raw, int size, int *num_tk);
 
 void
 split_test(char **tk_buff, int tk_sz);

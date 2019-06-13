@@ -5,9 +5,12 @@ set(CMAKE_C_STANDARD 90)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include_directories(include)
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../bin)
+include_directories(shared)
 
 add_executable(scan
 		lib/token.c
-        main.c)
+        main.c shared/file_io/file_io_helpers.h shared/file_io/file_io_helpers.c)
+
+enable_testing()
+
+add_test( split_test scan misc/simple_add.c)

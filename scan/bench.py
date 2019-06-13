@@ -4,6 +4,7 @@ import sys
 import subprocess
 import os
 
+
 def run():
     if len(sys.argv) < 2:
         print('Err: no arguments passed')
@@ -17,10 +18,12 @@ def run():
             exit(1)
         debug(sys.argv[2])
 
+
 def run_shell(arguments, native=False):
     process = subprocess.Popen(arguments, shell=native)
     out, err = process.communicate()
     return out, err
+
 
 def build():
     print('BUILDING:')
@@ -33,8 +36,9 @@ def build():
     if err is None:
         print('Done!')
 
+
 def debug(in_stream):
     run_shell(['./bin/scan', '<', in_stream], native=True)
 
-run()
 
+run()
