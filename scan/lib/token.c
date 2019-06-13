@@ -3,7 +3,7 @@
 // TODO : Implement error handling
 
 char **
-tokenize(FILE *read_fd)
+tokenize(FILE *read_fd, int *size)
 {
 	int readchars = 0, token_chars = 0, empty_row = 0, token_count = 0;
 	int buff_sz = 16, token_meta_sz = 4;
@@ -70,10 +70,10 @@ tokenize(FILE *read_fd)
 		}
 	}
 
-	split_test(token_buff, token_count);
-
 	free(buff);
 	free(token_meta);
+
+	*size = token_count;
 	return token_buff;
 }
 

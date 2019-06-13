@@ -5,6 +5,11 @@ int
 main()
 {
     printf("Zal Scanner!\n");
-    tokenize(stdin);
+    int size;
+    char **tokens = tokenize(stdin, &size);
+    
+    split_test(tokens, size);
+
+    free(tokens);
 	return 0;
 }
