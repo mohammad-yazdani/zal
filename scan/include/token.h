@@ -10,4 +10,7 @@ char **
 tokenize(const char *raw, int size, int *num_tk);
 
 void
+destroy_tkarr(char **tk, int size);
+
+void
 split_test(char **tk_buff, int tk_sz);

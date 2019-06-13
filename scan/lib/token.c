@@ -66,6 +66,13 @@ tokenize(const char *raw, int size, int *num_tk)
 	return token_buff;
 }
 
+void
+destroy_tkarr(char **tk, int size)
+{
+    int i = 0;
+    for (; i < size; i++)
+        free(tk[i]);
+}
 
 void
 split_test(char **tk_buff, int tk_sz)

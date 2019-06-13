@@ -18,6 +18,8 @@ main(int argc, char *argv[])
     
     split_test(tokens, size);
 
+    destroy_tkarr(tokens, size);
     free(tokens);
+    free(raw);
 	return 0;
 }
