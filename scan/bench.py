@@ -31,7 +31,7 @@ def build():
     os.chdir('build')
     run_shell(['cmake', '..'])
     _, err = run_shell(['make'])
-    run_shell(['mv', 'compile_commands.json', '..'])
+    #run_shell(['mv', 'compile_commands.json', '..'])
     os.chdir('..')
     if err is None:
         print('Done!')
