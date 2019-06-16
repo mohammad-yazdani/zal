@@ -1,12 +1,22 @@
 [
 {
-  "directory": "/mnt/c/Users/yazda/tur-ci/zal/scan/build",
-  "command": "/usr/bin/cc  -I/mnt/c/Users/yazda/tur-ci/zal/scan/include    -std=gnu90 -o CMakeFiles/scan.dir/lib/token.c.o   -c /mnt/c/Users/yazda/tur-ci/zal/scan/lib/token.c",
-  "file": "/mnt/c/Users/yazda/tur-ci/zal/scan/lib/token.c"
+  "directory": "/home/raynor106/zal/scan/build",
+  "command": "/usr/bin/cc  -I/home/raynor106/zal/scan/include -I/home/raynor106/zal/scan/shared    -std=gnu90 -o CMakeFiles/scan.dir/lib/token.c.o   -c /home/raynor106/zal/scan/lib/token.c",
+  "file": "/home/raynor106/zal/scan/lib/token.c"
 },
 {
-  "directory": "/mnt/c/Users/yazda/tur-ci/zal/scan/build",
-  "command": "/usr/bin/cc  -I/mnt/c/Users/yazda/tur-ci/zal/scan/include    -std=gnu90 -o CMakeFiles/scan.dir/main.c.o   -c /mnt/c/Users/yazda/tur-ci/zal/scan/main.c",
-  "file": "/mnt/c/Users/yazda/tur-ci/zal/scan/main.c"
+  "directory": "/home/raynor106/zal/scan/build",
+  "command": "/usr/bin/cc  -I/home/raynor106/zal/scan/include -I/home/raynor106/zal/scan/shared    -std=gnu90 -o CMakeFiles/scan.dir/main.c.o   -c /home/raynor106/zal/scan/main.c",
+  "file": "/home/raynor106/zal/scan/main.c"
+},
+{
+  "directory": "/home/raynor106/zal/scan/build",
+  "command": "/usr/bin/cc  -I/home/raynor106/zal/scan/include -I/home/raynor106/zal/scan/shared    -std=gnu90 -o CMakeFiles/scan.dir/shared/file_io/file_io_helpers.c.o   -c /home/raynor106/zal/scan/shared/file_io/file_io_helpers.c",
+  "file": "/home/raynor106/zal/scan/shared/file_io/file_io_helpers.c"
+},
+{
+  "directory": "/home/raynor106/zal/scan/build",
+  "command": "/usr/bin/cc  -I/home/raynor106/zal/scan/include -I/home/raynor106/zal/scan/shared    -std=gnu90 -o CMakeFiles/scan.dir/lib/dfa.c.o   -c /home/raynor106/zal/scan/lib/dfa.c",
+  "file": "/home/raynor106/zal/scan/lib/dfa.c"
 }
 ]
