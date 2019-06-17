@@ -12,7 +12,7 @@ add_executable(scan
         main.c
         shared/file_io/file_io_helpers.c
         lib/dfa.c
-        shared/str/str_helper.c)
+        shared/str/str_helper.c include/maximal_munch.h lib/maximal_munch.c)
 
 enable_testing()
 

@@ -2,12 +2,13 @@
 
 // TODO : Implement error handling
 
-int is_empty(char c)
+int
+is_empty(char c)
 {
     return (c == ' ' || c == '\t' || c == '\n');
 }
 
-char **
+TOKEN **
 tokenize(const char *raw, int size, int *num_tk)
 {
 	int token_count = 0, i = 0;
@@ -67,7 +68,7 @@ tokenize(const char *raw, int size, int *num_tk)
 }
 
 void
-destroy_tkarr(char **tk, int size)
+destroy_tkarr(TOKEN **tk, int size)
 {
     int i = 0;
     for (; i < size; i++)
@@ -75,7 +76,7 @@ destroy_tkarr(char **tk, int size)
 }
 
 void
-split_test(char **tk_buff, int tk_sz)
+split_test(TOKEN **tk_buff, int tk_sz)
 {
 	int i = 0;
 	for (; i < tk_sz; i++)
