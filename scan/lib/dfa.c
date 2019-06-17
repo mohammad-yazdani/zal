@@ -3,10 +3,9 @@
 //
 
 #include <dfa.h>
-#include <str/str_helper.h>
 
-enum
-CX_ACCEPTING transition(enum CX_ACCEPTING state, char in_char)
+
+ACCEPTING transition(ACCEPTING state, char in_char)
 {
     int out_trans = INVALID;
     switch (state)
@@ -87,15 +86,37 @@ CX_ACCEPTING transition(enum CX_ACCEPTING state, char in_char)
             else out_trans = INVALID;
             break;
         case BECOMES:
+            if (in_char == '=') out_trans = EQ;
+            break;
         case BANG:
+            if (in_char == '=') out_trans = NE;
+            break;
         case LT:
+            if (in_char == '=') out_trans = LE;
+            // TODO : maybe required for other comparison operators
+            //else if (is_sym(in_char)) out_trans = INVALID;
+            break;
         case GT:
+            if (in_char == '=') out_trans = GE;
+            break;
         case EQ:
+            if (is_sym(in_char)) out_trans = INVALID;
+            break;
         case NE:
+            if (is_sym(in_char)) out_trans = INVALID;
+            break;
         case LE:
+            if (is_sym(in_char)) out_trans = INVALID;
+            break;
         case GE:
+            if (is_sym(in_char)) out_trans = INVALID;
+            break;
         case COMMENT:
+            if (in_char != '\n') out_trans = COMMENT;
+            break;
         case WHITESPACE:
+            if (is_whitespace(in_char)) out_trans = WHITESPACE;
+            break;
         default:
             break;
     }
