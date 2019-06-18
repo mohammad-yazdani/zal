@@ -21,5 +21,6 @@ typedef enum CX_ACCEPTING {
 
 ACCEPTING transition(ACCEPTING state, char in_char);
 
+int is_in_alphabet(int state);
 
 #endif //SCAN_DFA_H

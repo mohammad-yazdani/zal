@@ -14,6 +14,7 @@ const char CX_ALPHABET[] = {'!', '.', ';', '$', ',', '(', ')', 'a',
                             'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
                             'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
+
 const int
 is_letter(const char c)
 {
@@ -50,4 +51,19 @@ is_sym(const char c)
         if (c == CX_SYM[i])
             return 1;
     return 0;
+}
+
+unsigned long
+str_len(const char *arr)
+{
+    int i = 0;
+    while (arr[i] != '\0')
+        i++;
+    return i;
+}
+
+int
+empty_str(const char *arr)
+{
+    return (str_len(arr) == 0);
 }

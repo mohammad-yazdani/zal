@@ -123,3 +123,9 @@ ACCEPTING transition(ACCEPTING state, char in_char)
 
     return out_trans;
 }
+
+int
+is_in_alphabet(int state)
+{
+    return ((state >= START) && (state <= BANG));
+}
