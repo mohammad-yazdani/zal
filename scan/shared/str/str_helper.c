@@ -67,3 +67,39 @@ empty_str(const char *arr)
 {
     return (str_len(arr) == 0);
 }
+char *
+reverse_str(const char *str)
+{
+    unsigned long len = str_len(str);
+    char *rev = malloc((len + 1) *sizeof(char));
+    rev[len] = '\0';
+    int i = 0;
+    for (; i < (len / 2); i++)
+    {
+        rev[i] = str[len - i - 1];
+        rev[len - i - 1] = str[i];
+    }
+    return rev;
+}
+
+char *
+add_char(char *str, char c, int prepend)
+{
+    int len = str_len(str);
+    str = realloc(str, (len + 2) *sizeof(char));
+    str[len + 1] = '\0';
+    len += 1;
+
+    if (prepend)
+    {
+        int i = len - 1;
+        for (; i > 0; i--)
+        {
+            str[i] = str[i - 1];
+        }
+        str[0] = c;
+    } else
+        str[len - 1] = c;
+
+    return str;
+}

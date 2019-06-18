@@ -16,10 +16,10 @@ typedef enum CX_ACCEPTING {
     ID, NUM, LPAREN, RPAREN, LBRACE, RBRACE, RETURN, IF,
     ELSE, WHILE, PRINTLN, WAIN, BECOMES, INT, EQ, NE, LT,
     GT, LE, GE, PLUS, MINUS, STAR, SLASH, PCT, COMMA, SEMI,
-    NEW, DELETE, LBRACK, RBRACK, AMP, NULL, ZERO, BANG
+    NEW, DELETE, LBRACK, RBRACK, AMP, NULLL, ZERO, BANG
 } ACCEPTING;
 
-ACCEPTING transition(ACCEPTING state, char in_char);
+int transition(ACCEPTING state, char in_char);
 
 int is_in_alphabet(int state);
 

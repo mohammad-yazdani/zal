@@ -5,9 +5,9 @@
 #include <dfa.h>
 
 
-ACCEPTING transition(ACCEPTING state, char in_char)
+int transition(ACCEPTING state, char in_char)
 {
-    int out_trans = INVALID;
+    int out_trans = -1;
     switch (state)
     {
         case START:
@@ -90,14 +90,15 @@ ACCEPTING transition(ACCEPTING state, char in_char)
             break;
         case BANG:
             if (in_char == '=') out_trans = NE;
+            else if (is_sym(in_char)) out_trans = INVALID;
             break;
         case LT:
             if (in_char == '=') out_trans = LE;
-            // TODO : maybe required for other comparison operators
-            //else if (is_sym(in_char)) out_trans = INVALID;
+            else if (is_sym(in_char)) out_trans = INVALID;
             break;
         case GT:
             if (in_char == '=') out_trans = GE;
+            else if (is_sym(in_char)) out_trans = INVALID;
             break;
         case EQ:
             if (is_sym(in_char)) out_trans = INVALID;

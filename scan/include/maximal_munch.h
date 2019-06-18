@@ -9,6 +9,6 @@
 #include <dfa.h>
 #include <str/str_helper.h>
 
-TOKEN ** maximal_munch(const char **input);
+TOKEN **maximal_munch(char *input);
 
 #endif //SCAN_MAXIMAL_MUNCH_H
