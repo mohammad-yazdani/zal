@@ -29,17 +29,18 @@ munch_one(const char *input, unsigned long *offset, int state, char *consumed)
 }
 
 TOKEN **
-munch_all(char *input, unsigned long *offset, TOKEN **accum)
+munch_all(char *input, unsigned long *offset, TOKEN **accum, unsigned long accumsz)
 {
-    if (input == NULL) // TODO : Reverse accum
+    if (input == NULL)
     {
-
+        reverse_tkarr(accum, accumsz);
+        return accum;
     } else
     {
         char *consumed = malloc(4 *sizeof(char));
         TOKEN *munched = munch_one(input, offset, START, consumed);
-        // TODO : Pre-pend munched to accum
-        return munch_all(input, offset, accum);
+        add_tkarr(accum, accumsz, munched, 1);
+        return munch_all(input, offset, accum, accumsz + 1);
     }
 }
 
@@ -48,5 +49,5 @@ maximal_munch(char *input)
 {
     TOKEN **accum = malloc(sizeof(TOKEN *));
     unsigned long offset = 0;
-    return munch_all(input, &offset, accum);
+    return munch_all(input, &offset, accum, 0);
 }

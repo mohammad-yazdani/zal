@@ -84,3 +84,38 @@ split_test(char **tk_buff, int tk_sz)
 		printf("%s\n", tk_buff[i]);
 	}
 }
+
+void
+reverse_tkarr(TOKEN **tkarr, unsigned long size)
+{
+    int i = 0;
+    for (; i < (size / 2); i++)
+    {
+        TOKEN *right = tkarr[size - i - 1];
+        TOKEN *left = tkarr[i];
+        tkarr[i] = right;
+        tkarr[size - i - 1] = left;
+    }
+}
+
+void
+add_tkarr(TOKEN **tkarr, unsigned long size, TOKEN *tk, int prepend)
+{
+    tkarr = realloc(tkarr, (size + 1) * sizeof(TOKEN *));
+
+    if (prepend)
+    {
+        int i = size;
+        for (; i > 0; i--)
+        {
+            tkarr[i] = tkarr[i - 1];
+        }
+        tkarr[0] = tk;
+
+        size += 1;
+    } else
+    {
+        tkarr[size] = tk;
+        size += 1;
+    }
+}

@@ -9,6 +9,9 @@ typedef struct min_c_token {
 // TODO : Re-implement functions to respect tk type
 char **tokenize(const char *raw, int size, int *num_tk);
 void destroy_tkarr(char **tk, int size);
+void reverse_tkarr(TOKEN **tkarr, unsigned long size);
+void add_tkarr(TOKEN **tkarr, unsigned long size, TOKEN *tk, int prepend);
+
 void split_test(char **tk_buff, int tk_sz);
 
 // TODO : TOKEN APIs
