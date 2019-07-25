@@ -119,3 +119,10 @@ add_tkarr(TOKEN **tkarr, unsigned long size, TOKEN *tk, int prepend)
         size += 1;
     }
 }
+
+TOKEN *
+create_token(int state, const char *val)
+{
+	return NULL;
+}
+
