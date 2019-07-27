@@ -3,6 +3,7 @@ project(scan)
 
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_BUILD_TYPE Debug)
 
 include_directories(include)
 include_directories(shared)

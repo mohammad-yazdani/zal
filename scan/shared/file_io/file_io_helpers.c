@@ -15,10 +15,11 @@ read_file(char * file_name, int *sz)
         exit(EXIT_FAILURE);
     }
 
-    char cc;
+    int cc = 0;
     int idx = 0, buff_sz = 0;
-    while ((cc = (char) fgetc(in_file)) != EOF)
+    while ((cc = fgetc(in_file)) != EOF)
     {
+    	char read_char = (char) cc;
         idx += 1;
         if (buff_sz < idx)
         {
