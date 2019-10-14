@@ -5,7 +5,7 @@
 #ifndef SCAN_DFA_H
 #define SCAN_DFA_H
 
-#include <str/str_helper.h>
+#include <str_helper.h>
 
 #define STATES 1
 #define WHITE_SPACE 6

@@ -7,7 +7,7 @@
 
 #include "token.h"
 #include <dfa.h>
-#include <str/str_helper.h>
+#include <str_helper.h>
 
 TOKEN **maximal_munch(char *input);
 

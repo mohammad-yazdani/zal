@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <token.h>
-#include <file_io/file_io_helpers.h>
+#include <file_io_helpers.h>
 
 int
 main(int argc, char *argv[])
