@@ -5,4 +5,6 @@ build
 .vscode
 bin/
 bin
+.sconsign.dblite
+*.o
 

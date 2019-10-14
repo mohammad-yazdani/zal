@@ -1,0 +1,8 @@
+env = Environment(CPPPATH = ['./src/include', './src/shared'])
+
+# TODO : scan src tree for includes and libs
+includes=[]
+lib=[]
+
+env.Program(target = 'scan', source = ['./src/main.c', Glob('./src/lib/*.c'), Glob('./src/shared/file_io/*.c'), Glob('./src/shared/str/*.c')])
+
