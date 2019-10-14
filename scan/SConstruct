@@ -1,8 +1,22 @@
+from os import walk
+from os.path import join
+
+# TODO : The FUNDAMENTAL FIVE !!!!!
+top_src = 'src'
+includes=['include']
+binaries=['scan']
+objects=[]
+
+# Later add this code to a separate python module
+def fetch_src_files(top_src):
+    farray = []
+    for (dirpath, dirnames, filenames) in walk(top_src):
+        for f in filenames:
+            if f.endswith('.c'):
+                farray.append(join(dirpath, f))
+    return farray
+
 env = Environment(CPPPATH = ['./src/include', './src/shared'])
 
-# TODO : scan src tree for includes and libs
-includes=[]
-lib=[]
-
-env.Program(target = 'scan', source = ['./src/main.c', Glob('./src/lib/*.c'), Glob('./src/shared/file_io/*.c'), Glob('./src/shared/str/*.c')])
+env.Program(target = 'scan', source = fetch_src_files(top_src))
 
