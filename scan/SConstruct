@@ -1,0 +1,35 @@
+from os import walk, chdir
+from os.path import join, realpath
+
+top_src = 'src'
+
+# TODO : For later use
+binaries=['scan']
+objects=[]
+
+# TODO : Later add this code to a separate python module
+def fetch_src_files(top_src):
+    chdir(top_src)
+    farray = []
+    for (dirpath, dirnames, filenames) in walk('.'):
+        for f in filenames:
+            if f.endswith('.c'):
+                farray.append(join(dirpath, f))
+    chdir('..')
+    return farray
+def find_include_dirs(top_src):
+    chdir(top_src)
+    darray = []
+    for (dirpath, dirnames, filenames) in walk('.'):
+        for f in filenames:
+            if f.endswith('.h'):
+                darray.append(dirpath)
+                break
+    chdir('..')
+    return darray
+
+sources = fetch_src_files(top_src)
+includes = find_include_dirs(top_src)
+
+SConscript(['src/SConscript'], variant_dir='build', exports='includes sources')
+

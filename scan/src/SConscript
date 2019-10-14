@@ -1,0 +1,5 @@
+Import('includes sources')
+
+env = Environment(CPPPATH = includes)
+env.Program(target = 'scan', source = sources)
+

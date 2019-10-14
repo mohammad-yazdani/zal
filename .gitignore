@@ -1,0 +1,10 @@
+.idea
+cmake-build-debug
+build
+.vscode/
+.vscode
+bin/
+bin
+.sconsign.dblite
+*.o
+
