@@ -1,10 +1,14 @@
-1. Figure out why the f*ck `vim .` takes so long here
+1. Get a FA defs to compare tokens against and build syntax tree
 
+build sys:
+1. get scons to run/debug/test with command line ops
 
-colorscheme changes:
-1. Line highlight is gross, make it more elegant and easier on the eyes
-2. Maybe change the C generic token color from while
-3. Highlight placeholders
-4. Distinguish between c keywords and user defined tokens (free vs free_blah)
-5. Change function call colors from gross yellow/orange to some other color
+editor stuff:
+1. figure out why the f*ck `vim .` takes so long here
+	colorscheme changes:
+	1. line highlight is gross, make it more elegant and easier on the eyes
+	2. maybe change the C generic token color from while
+	3. highlight placeholders
+	4. distinguish between c keywords and user defined tokens (free vs free_blah)
+	5. change function call colors from gross yellow/orange to some other color
 
