@@ -1,8 +1,8 @@
 # The scanning bit
 
 # Dev
-Use `scons`
+Use `cmake` (temp)
 
 # Prod
-Use `cmake` (for now)
+Use `scons`
 
