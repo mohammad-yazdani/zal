@@ -1,5 +1,11 @@
 Import('includes sources')
 
+COMPILE_DB="compile_commands.json"
+
 env = Environment(CPPPATH = includes)
+env['CXX']='clang'
+env.Replace(CC="clang") # Don't know how correct this is
+env.Append(CCFLAGS=['-MJ', COMPILE_DB])
+
 env.Program(target = 'scan', source = sources)
 
