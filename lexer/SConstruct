@@ -4,7 +4,7 @@ from os.path import join, realpath
 top_src = 'src'
 
 # TODO : For later use
-binaries=['scan']
+binaries=['lexer']
 objects=[]
 
 # TODO : Later add this code to a separate python module

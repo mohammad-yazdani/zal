@@ -3,6 +3,6 @@
 int
 main()
 {
-    printf("link\n");
+    printf("Generator\n");
     return 0;
 }

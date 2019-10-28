@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(scan)
+project(lexer)
 
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -9,7 +9,7 @@ include_directories(src/include)
 include_directories(src/shared/file_io)
 include_directories(src/shared/str)
 
-add_executable(scan
+add_executable(lexer
 		src/lib/token.c
         src/main.c
         src/shared/file_io/file_io_helpers.c
@@ -19,4 +19,4 @@ add_executable(scan
 
 enable_testing()
 
-add_test( split_test scan user/simple_add.c)
+add_test( split_test lexer user/simple_add.c)

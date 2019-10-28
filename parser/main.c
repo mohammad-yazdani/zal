@@ -3,6 +3,6 @@
 int
 main()
 {
-    printf("asm\n");
+    printf("parser\n");
     return 0;
 }

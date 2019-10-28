@@ -3,6 +3,6 @@
 int
 main()
 {
-    printf("parse\n");
+    printf("linker\n");
     return 0;
 }

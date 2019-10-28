@@ -7,7 +7,7 @@ main(int argc, char *argv[])
 {
     if (argc < 2)
     {
-        perror("Usage: ./scan <c source file>\n");
+        perror("Usage: lexer <C source file>\n");
         exit(EXIT_FAILURE);
     }
     int in_sz;
