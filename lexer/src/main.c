@@ -13,9 +13,6 @@ main(int argc, char *argv[])
     int in_sz;
     char *raw = read_file(argv[1], &in_sz);
 
-    // TODO : DEBUG
-    printf("%s\n", raw);
-
     int size;
     char **tokens = tokenize(raw, in_sz, &size);
     

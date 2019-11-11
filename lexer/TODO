@@ -8,3 +8,4 @@ colorscheme changes:
 4. Distinguish between c keywords and user defined tokens (free vs free_blah)
 5. Change function call colors from gross yellow/orange to some other color
 
+tokenize semi colon
