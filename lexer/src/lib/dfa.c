@@ -5,13 +5,13 @@
 #include <dfa.h>
 
 
-int transition(ACCEPTING state, char in_char)
+state munch(state prev, char in_char)
 {
     int out_trans = -1;
-    switch (state)
+    switch (prev)
     {
         case START:
-            if (is_letter(in_char)) out_trans = ID;
+            if (is_letter(in_char)) out_trans = DEF;
             else if (in_char == '0') out_trans = ZERO;
             else if (is_digit(in_char)) out_trans = NUM;
             else if (is_whitespace(in_char)) out_trans = WHITESPACE; // TODO : WRONG
@@ -78,8 +78,8 @@ int transition(ACCEPTING state, char in_char)
         case ZERO:
             if (is_letter_or_digit(in_char)) out_trans = INVALID;
             break;
-        case ID:
-            if (is_letter_or_digit(in_char)) out_trans = ID;
+        case DEF:
+            if (is_letter_or_digit(in_char)) out_trans = DEF;
             break;
         case NUM:
             if (is_digit(in_char)) out_trans = NUM;
@@ -125,8 +125,9 @@ int transition(ACCEPTING state, char in_char)
     return out_trans;
 }
 
-int
-is_in_alphabet(int state)
+stateful_token *
+maximal_munch(const stateless_token *tk)
 {
-    return ((state >= START) && (state <= BANG));
+    return NULL;
 }
+

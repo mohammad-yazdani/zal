@@ -1,13 +1,12 @@
 #include <token.h>
 
-// TODO : Implement error handling
-
+// TODO : MOVE TO SCANNER
 int
 is_empty(char c)
 {
     return (c == ' ' || c == '\t' || c == '\n');
 }
-
+// TODO : MOVE TO SCANNER
 char **
 tokenize(const char *raw, int size, int *num_tk)
 {
@@ -66,7 +65,7 @@ tokenize(const char *raw, int size, int *num_tk)
 	*num_tk = token_count;
 	return token_buff;
 }
-
+// TODO : MOVE TO SCANNER
 void
 destroy_tkarr(char **tk, int size)
 {
@@ -74,7 +73,7 @@ destroy_tkarr(char **tk, int size)
     for (; i < size; i++)
         free(tk[i]);
 }
-
+// TODO : MOVE TO SCANNER
 void
 split_test(char **tk_buff, int tk_sz)
 {
@@ -84,7 +83,7 @@ split_test(char **tk_buff, int tk_sz)
 		printf("%s\n", tk_buff[i]);
 	}
 }
-
+// TODO : MOVE TO SCANNER
 void
 reverse_tkarr(TOKEN **tkarr, unsigned long size)
 {
@@ -97,7 +96,7 @@ reverse_tkarr(TOKEN **tkarr, unsigned long size)
         tkarr[size - i - 1] = left;
     }
 }
-
+// TODO : MOVE TO SCANNER
 void
 add_tkarr(TOKEN **tkarr, unsigned long size, TOKEN *tk, int prepend)
 {
@@ -120,8 +119,9 @@ add_tkarr(TOKEN **tkarr, unsigned long size, TOKEN *tk, int prepend)
     }
 }
 
-TOKEN *
-create_token(int state, const char *val)
+// TODO : IMPLEMENT
+stateless_token *
+create_token(const char *val, const token_type type)
 {
 	return NULL;
 }

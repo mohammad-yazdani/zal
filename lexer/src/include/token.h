@@ -1,19 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct min_c_token {
-	int state;
-	char *value;
-} TOKEN;
+// This header defines the data-structures describing the tokens of MIN_C.
 
-// TODO : Re-implement functions to respect tk type
-char **tokenize(const char *raw, int size, int *num_tk);
-void destroy_tkarr(char **tk, int size);
-void reverse_tkarr(TOKEN **tkarr, unsigned long size);
-void add_tkarr(TOKEN **tkarr, unsigned long size, TOKEN *tk, int prepend);
+typedef enum TOKEN_TYPE {
+    KEYWORD,
+    ID,
+    CONST,
+    STRING,
+    SYMBOL,
+    OPERATOR
+} token_type;
 
-void split_test(char **tk_buff, int tk_sz);
+typedef struct STATELESS_TOKEN {
+	const token_type tk_type;
+	const char *tk_val;
+} stateless_token;
 
-// TODO : TOKEN APIs
-TOKEN *
-create_token(int state, const char *val);
+stateless_token *create_token(const char *val, token_type type);
+void destroy_token(stateless_token *tk);
+
