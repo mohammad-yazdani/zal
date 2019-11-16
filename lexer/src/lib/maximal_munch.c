@@ -1,9 +1,8 @@
-//
-// Created by yazda on 6/17/2019.
-//
+#include <dfa.h>
 
 // TODO : Change according to new design
-
+typedef struct temp_tk {
+} TOKEN;
 
 // TODO : consumed defaults to empty. During the  recursive calls it
 // TODO : is populated using realloc
@@ -16,9 +15,10 @@ munch_one(const char *input, unsigned long *offset, int state, char *consumed)
         if (is_in_alphabet(state))
         {
             // TODO : Here we create a TOKEN, has to co with consumed stuff
-            TOKEN *tk = create_token(state, reverse_str(consumed)); // TODO : error handling
+            //TOKEN *tk = create_token(state, reverse_str(consumed)); // TODO : error handling
+            TOKEN *tk = 0x0;
             return tk;
-        } else return NULL;
+        } else return 0x0;
     } else
     {
         *offset += 1;
@@ -31,7 +31,7 @@ munch_one(const char *input, unsigned long *offset, int state, char *consumed)
 TOKEN **
 munch_all(char *input, unsigned long *offset, TOKEN **accum, unsigned long accumsz)
 {
-    if (input == NULL)
+    if (input == 0x0)
     {
         reverse_tkarr(accum, accumsz);
         return accum;
@@ -45,7 +45,7 @@ munch_all(char *input, unsigned long *offset, TOKEN **accum, unsigned long accum
 }
 
 TOKEN **
-maximal_munch(char *input)
+maximal_munch_temp(char *input)
 {
     TOKEN **accum = malloc(sizeof(TOKEN *));
     unsigned long offset = 0;

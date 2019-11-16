@@ -11,10 +11,12 @@ include_directories(src/shared/str)
 
 add_executable(lexer
 		src/lib/token.c
+        src/lib/scan.c
         src/main.c
         src/shared/file_io/file_io_helpers.c
         src/lib/dfa.c
-        src/shared/str/str_helper.c src/include/maximal_munch.h src/lib/maximal_munch.c 
+        src/shared/str/str_helper.c 
+        # src/lib/maximal_munch.c 
         src/include/scan.h)
 
 enable_testing()

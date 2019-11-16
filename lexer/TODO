@@ -1,11 +1,2 @@
-1. Figure out why the f*ck `vim .` takes so long here
+Implement Munch
 
-
-colorscheme changes:
-1. Line highlight is gross, make it more elegant and easier on the eyes
-2. Maybe change the C generic token color from while
-3. Highlight placeholders
-4. Distinguish between c keywords and user defined tokens (free vs free_blah)
-5. Change function call colors from gross yellow/orange to some other color
-
-tokenize semi colon
