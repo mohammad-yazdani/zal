@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <token.h>
+#include <scan.h>
 #include <file_io_helpers.h>
 
 // ORDER OF OPERATIONS:
@@ -19,6 +19,12 @@ main(int argc, char *argv[])
     }
     int in_sz;
     char *raw = read_file(argv[1], &in_sz);
+
+    LL_CHAR **word_ll;
+    if (split_words(raw, word_ll)) {
+        return 1;
+    }
+    printf("Head: %p\n", word_ll);
     free(raw);
 	return 0;
 }

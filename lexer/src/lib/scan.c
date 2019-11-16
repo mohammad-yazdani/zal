@@ -31,6 +31,8 @@ split_words(char *in, LL_CHAR **out)
     if (len < 1) return 1; 
 
     LL_CHAR *head = create_LL_char(in[0]);
+    LL_CHAR *output_head = head;
+
     unsigned int i = 1;
     for (; i < len; i++)
     {
@@ -43,6 +45,7 @@ split_words(char *in, LL_CHAR **out)
             head = LL_push(head, in[i]);
         }
     }
+    *out = output_head;
 
     return 0;
 }
