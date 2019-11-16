@@ -13,6 +13,7 @@ create_LL_char(char val)
 {
     LL_CHAR *new_char = malloc(sizeof(LL_CHAR));
     new_char->val = val;
+    new_char->next = NULL;
     return new_char;
 }
 
@@ -28,11 +29,10 @@ split_words(char *in, LL_CHAR **out)
 {
     // Simple ops to separate words out of white space
     size_t len = strlen(in);
-    if (len < 1) return 1; 
+    if (len < 1) return 1;
+    *out = create_LL_char(in[0]);
 
-    LL_CHAR *head = create_LL_char(in[0]);
-    LL_CHAR *output_head = head;
-
+    LL_CHAR *head = *out;
     unsigned int i = 1;
     for (; i < len; i++)
     {
@@ -45,7 +45,6 @@ split_words(char *in, LL_CHAR **out)
             head = LL_push(head, in[i]);
         }
     }
-    *out = output_head;
 
     return 0;
 }

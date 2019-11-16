@@ -16,6 +16,6 @@ LL_CHAR *create_LL_char(char val);
 LL_CHAR *LL_push(LL_CHAR *head, char val); // TODO : To be re-written later as part of the linked list
 
 // TODO : State: these functions allocate objects/arrays
-int split_words(char *in, LL_CHAR **out);
+int split_words(char *in, LL_CHAR **out); // TODO : temp: read func impl for docs
 int tokenize(LL_CHAR **in, stateless_token **out); 
 

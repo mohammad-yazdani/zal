@@ -24,7 +24,16 @@ main(int argc, char *argv[])
     if (split_words(raw, word_ll)) {
         return 1;
     }
-    printf("Head: %p\n", word_ll);
+    
+    // TODO : Simple testing splitter
+    while ((*word_ll)->next)
+    {
+        if ((*word_ll)->val != '\0') printf("%c", (*word_ll)->val);
+        else printf("\n");
+        *word_ll = (*word_ll)->next; 
+    }
+    printf("\n");
+    
     free(raw);
 	return 0;
 }
