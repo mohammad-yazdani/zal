@@ -24,7 +24,9 @@ main(int argc, char *argv[])
     if (split_words(raw, word_ll)) {
         return 1;
     }
-    
+   
+    tokenize(*word_ll, 0x0);
+
     // TODO : Simple testing splitter
     while ((*word_ll)->next)
     {

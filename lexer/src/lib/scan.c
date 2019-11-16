@@ -13,6 +13,7 @@ create_LL_char(char val)
 {
     LL_CHAR *new_char = malloc(sizeof(LL_CHAR));
     new_char->val = val;
+    new_char->prev = NULL;
     new_char->next = NULL;
     return new_char;
 }
@@ -21,6 +22,7 @@ LL_CHAR *
 LL_push(LL_CHAR *head, char new_val)
 {
     head->next = create_LL_char(new_val);
+    head->next->prev = head;
     return head->next;
 }
 
@@ -49,10 +51,31 @@ split_words(char *in, LL_CHAR **out)
     return 0;
 }
 
+// TODO : put in docs:
+// TODO : this function either has to mutate the input linked list
+// TODO : or copy it
 int
-tokenize(LL_CHAR **in, stateless_token **out)
+tokenize(LL_CHAR *in, stateless_token **out)
 {
     // TODO : Extract tokens out of the words based on lang standards
+    
+    // TODO : Make the human brain happy here
+    LL_CHAR *head = in;
+    while (head)
+    {
+        if (head->val == ';')
+        {
+            // TODO : This should be implemented in linked list API later
+            // TODO : The language REQUIRES space after `;`
+            LL_CHAR *prev = head->prev;
+            // old->l0
+            LL_CHAR *l0 = LL_push(prev, '\0');       
+            // l0->curr
+            l0->next = head; 
+        }
+        head = head->next;
+    }
+
     return 0;
 }
 
