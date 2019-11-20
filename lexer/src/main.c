@@ -25,16 +25,18 @@ main(int argc, char *argv[])
         return 1;
     }
    
-    tokenize(*word_ll, 0x0);
+    //tokenize(*word_ll, 0x0);
 
     // TODO : Simple testing splitter
-    while ((*word_ll)->next)
+    /*while ((*word_ll)->next)
     {
         if ((*word_ll)->val != '\0') printf("%c", (*word_ll)->val);
         else printf("\n");
         *word_ll = (*word_ll)->next; 
     }
-    printf("\n");
+    printf("\n");*/
+
+    printf("%d\n", iterative_munch(word_ll));
     
     free(raw);
 	return 0;

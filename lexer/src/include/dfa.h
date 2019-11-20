@@ -1,5 +1,5 @@
 #include <str_helper.h>
-#include <token.h>
+#include <scan.h>
 
 typedef enum STATE {
     START,
@@ -55,6 +55,10 @@ typedef struct STATEFUL_TOKEN {
 // This basically takes a char with prev state and sees if what you're doing makes sense.
 state munch(state prev, char in_char);
 
+// Maximal munch over a linked list
+state iterative_munch(LL_CHAR **chars);
+
+// TODO : Confusing :(
 // This calls `munch` on a string to get words out
 stateful_token *maximal_munch(const stateless_token *tk);
 

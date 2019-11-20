@@ -15,7 +15,8 @@ state munch(state prev, char in_char)
             else if (in_char == '0') out_trans = ZERO;
             else if (is_digit(in_char)) out_trans = NUM;
             else if (is_whitespace(in_char)) out_trans = WHITESPACE; // TODO : WRONG
-            else {
+            else
+            {
                 switch (in_char)
                 {
                     case '-':
@@ -75,11 +76,15 @@ state munch(state prev, char in_char)
                     default:break;
                 }
             }
+            break;
         case ZERO:
             if (is_letter_or_digit(in_char)) out_trans = INVALID;
             break;
         case DEF:
             if (is_letter_or_digit(in_char)) out_trans = DEF;
+
+            // TODO : This could also mean end of DEF or something like that
+            if (is_whitespace(in_char)) out_trans = START; // TODO : Is it correct?
             break;
         case NUM:
             if (is_digit(in_char)) out_trans = NUM;
@@ -123,6 +128,19 @@ state munch(state prev, char in_char)
     }
 
     return out_trans;
+}
+
+state
+iterative_munch(LL_CHAR **chars)
+{
+    state head_state = START;
+    LL_CHAR *head = *chars;
+    while (head)
+    {
+        head_state = munch(head_state, head->val);
+        head = head->next;
+    }
+    return -1;
 }
 
 stateful_token *

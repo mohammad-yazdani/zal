@@ -1,2 +1,4 @@
 Implement Munch
-
+- We have to use return in munch
+- What the `stat emunch(state prev, char in_char)` function basically does is tokenizing
+    a char stream/array.

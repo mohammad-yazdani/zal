@@ -18,7 +18,7 @@ const char CX_ALPHABET[] = {'!', '.', ';', '$', ',', '(', ')', 'a',
 const int
 is_letter(const char c)
 {
-    return (c >= 65 && c <= 90);
+    return (c >= 97 && c <= 122);
 }
 
 const int
@@ -37,9 +37,10 @@ const int
 is_whitespace(const char c)
 {
     return (
-        c == 32 ||
-        c == 9 ||
-        c == 10
+        c == '\n' ||
+        c == '\t' ||
+        c == ' ' ||
+        c == 0
         );
 }
 

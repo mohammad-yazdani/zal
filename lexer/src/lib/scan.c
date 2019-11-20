@@ -56,18 +56,28 @@ split_words(char *in, LL_CHAR **out)
 }
 
 
+
+
+/*>>>>>>>>>>>>>>>>>>>>>>>>> TEMP <<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+
+// TODO : Use this temporarily for symbol crap
 // TODO : Integrate this helper function properly later
 int
 is_sym_temp(char val)
 {
     int sum = 0;
     sum += val == ';';
-    sum += (val == ']' || val == '[');
+    sum += (val == '[' || val == ']');
     sum += (val == '(' || val == ')');
+    sum += (val == '{' || val == '}');
     sum += val == ',';
+    sum += val == '=';
+    sum += val == '+';
+    sum += val == '-';
+    sum += val == '*';
+    sum += val == '/';
     return sum;
 }
-
 // TODO : put in docs:
 // TODO : this function either has to mutate the input linked list
 // TODO : or copy it
@@ -86,9 +96,12 @@ tokenize(LL_CHAR *in, stateless_token **out)
             // TODO : This should be implemented in linked list API later
             // TODO : The language REQUIRES space after `;`
             LL_CHAR *prev = head->prev;
-            // prev->\0
-            LL_CHAR *l0 = LL_push(prev, '\0');
-            if (head->next && head->next != '\0') {
+            
+            if (head->prev && head->prev->val != '\0') {
+                // prev->\0
+                LL_CHAR *l0 = LL_push(prev, '\0');
+            }
+            if (head->next && head->next->val != '\0') {
                 // head->\0
                 LL_CHAR *r0 = LL_push(head, '\0');
             }
