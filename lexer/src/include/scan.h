@@ -2,9 +2,6 @@
 // It requires token.h to produce data-structures understandable by the parser
 
 #include <stdlib.h>
-#include <token.h>
-
-struct linked_list_scanned_char;
 
 typedef struct linked_list_scanned_char {
     char val;

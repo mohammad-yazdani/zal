@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <scan.h>
 #include <file_io_helpers.h>
+#include <dfa.h>
 // #include <debug.h> // TODO : Fix include problems
 
 // ORDER OF OPERATIONS:
@@ -24,18 +24,16 @@ main(int argc, char *argv[])
     // TODO :Debugging switch
     DEBUG = 1;
 
-    slog("Reading C input...\n");
+    printf("Reading C input...\n");
     int in_sz;
     char *raw = read_file(argv[1], &in_sz);
 
-    slog("Creating a linked-list of C input...\n");
+    printf("Creating a linked-list of C input...\n");
     LL_CHAR *raw_ll = string_to_ll(raw);
     
-    slog("Running maximal-munch on the linked-list of characters...\n");
+    printf("Running maximal-munch on the linked-list of characters...\n");
     int final_state = iterative_munch(raw_ll);
-    slog("Final state of maximal-munch: ");
-    ilog(final_state);
-    slog("\n");
+    printf("Final state of maximal-munch: %d\n", final_state);
     
     // TODO : Free LL
     free(raw);

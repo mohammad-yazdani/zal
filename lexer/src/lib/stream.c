@@ -2,7 +2,7 @@
 
 // TODO : Calls malloc
 STREAM *
-create_stream(const LL_CHAR* head)
+create_stream(LL_CHAR* head)
 {
     STREAM *newstream = malloc(sizeof(STREAM));
     newstream->head = head;
@@ -10,18 +10,22 @@ create_stream(const LL_CHAR* head)
     return newstream;
 }
 
-void
+int
 next(STREAM *s)
 {
     // TODO : Check for NULL
+    if (s->cursor->next == NULL) return 0;
     s->cursor = s->cursor->next;
+    return 1;
 }
 
-void
+int
 prev(STREAM *s)
 {
     // TODO : Check for NULL
+    if (s->cursor->prev == NULL) return 0;
     s->cursor = s->cursor->prev;
+    return 1;
 }
 
 char
