@@ -53,7 +53,7 @@ typedef struct STATEFUL_TOKEN {
 } stateful_token;
 
 // This basically takes a char with prev state and sees if what you're doing makes sense.
-state munch(state prev, char in_char);
+LL_CHAR* munch(LL_CHAR* buffer_head, LL_CHAR* state_head);
 
 // Maximal munch over a linked list
 state iterative_munch(LL_CHAR *chars);
