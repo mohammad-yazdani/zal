@@ -1,22 +1,32 @@
+#ifndef DEBUG_H
+#define DEBUG_H
+
 #include <stdio.h>
 
-extern int DEBUG;
+int DEBUG = 0;
 
 void
 slog(char *msg)
 {
-    printf("%s", msg);
+    if (DEBUG) {
+        printf("%s", msg);
+    }
 }
 
 void
 chlog(char msg)
 {
-    printf("%c", msg);
+    if (DEBUG) {
+        printf("%c", msg);
+    }
 }
 
 void
 ilog(int msg)
 {
-    printf("%d", msg);
+    if (DEBUG) {
+        printf("%d", msg);
+    }
 }
 
+#endif /* DEBUG_H */

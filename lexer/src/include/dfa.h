@@ -56,9 +56,12 @@ typedef struct STATEFUL_TOKEN {
 state munch(state prev, char in_char);
 
 // Maximal munch over a linked list
-state iterative_munch(LL_CHAR **chars);
+state iterative_munch(LL_CHAR *chars);
 
 // TODO : Confusing :(
 // This calls `munch` on a string to get words out
 stateful_token *maximal_munch(const stateless_token *tk);
+
+// Helpers
+void pretty_state(state s);
 

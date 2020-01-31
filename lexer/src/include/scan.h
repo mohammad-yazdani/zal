@@ -5,18 +5,18 @@
 #include <token.h>
 
 struct linked_list_scanned_char;
-typedef struct linked_list_scanned_char LL_CHAR;
 
 typedef struct linked_list_scanned_char {
     char val;
-    LL_CHAR *prev;
-    LL_CHAR *next;
+    struct linked_list_scanned_char *prev;
+    struct linked_list_scanned_char *next;
 } LL_CHAR;
 
 LL_CHAR *create_LL_char(char val);
-LL_CHAR *LL_push(LL_CHAR *head, char val); // TODO : To be re-written later as part of the linked list
+// TODO : To be re-written later as part of the linked list
+LL_CHAR *LL_push(LL_CHAR *head, char val); 
 
-// TODO : State: these functions allocate objects/arrays
-int split_words(char *in, LL_CHAR **out); // TODO : temp: read func impl for docs
-int tokenize(LL_CHAR *in, stateless_token **out); 
+// Helper
+// Allocs mem
+LL_CHAR *string_to_ll(char *str);
 

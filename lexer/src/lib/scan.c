@@ -30,85 +30,18 @@ LL_push(LL_CHAR *head, char new_val)
     return new_l;
 }
 
-int
-split_words(char *in, LL_CHAR **out)
+LL_CHAR *
+string_to_ll(char *str)
 {
-    // Simple ops to separate words out of white space
-    size_t len = strlen(in);
-    if (len < 1) return 1;
-    *out = create_LL_char(in[0]);
+    LL_CHAR *head = create_LL_char(str[0]);
+    LL_CHAR *prepush_head = head;
 
-    LL_CHAR *head = *out;
-    unsigned int i = 1;
-    for (; i < len; i++)
+    unsigned int len = strlen(str);
+    unsigned int  i = 1;
+    for(; i < len; i++)
     {
-        if (is_empty(in[i]))
-        {
-            if (head->val != '\0') head = LL_push(head, '\0'); 
-        }
-        else
-        {
-            head = LL_push(head, in[i]);
-        }
+        head = LL_push(head, str[i]);
     }
 
-    return 0;
+    return prepush_head;
 }
-
-
-
-
-/*>>>>>>>>>>>>>>>>>>>>>>>>> TEMP <<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-
-// TODO : Use this temporarily for symbol crap
-// TODO : Integrate this helper function properly later
-int
-is_sym_temp(char val)
-{
-    int sum = 0;
-    sum += val == ';';
-    sum += (val == '[' || val == ']');
-    sum += (val == '(' || val == ')');
-    sum += (val == '{' || val == '}');
-    sum += val == ',';
-    sum += val == '=';
-    sum += val == '+';
-    sum += val == '-';
-    sum += val == '*';
-    sum += val == '/';
-    return sum;
-}
-// TODO : put in docs:
-// TODO : this function either has to mutate the input linked list
-// TODO : or copy it
-int
-tokenize(LL_CHAR *in, stateless_token **out)
-{
-    // TODO : Extract tokens out of the words based on lang standards
-    
-    // TODO : Make the human brain happy here
-    LL_CHAR *head = in;
-    while (head)
-    {
-        int symbol = is_sym_temp(head->val);
-        if (symbol != 0)
-        {
-            // TODO : This should be implemented in linked list API later
-            // TODO : The language REQUIRES space after `;`
-            LL_CHAR *prev = head->prev;
-            
-            if (head->prev && head->prev->val != '\0') {
-                // prev->\0
-                LL_CHAR *l0 = LL_push(prev, '\0');
-            }
-            if (head->next && head->next->val != '\0') {
-                // head->\0
-                LL_CHAR *r0 = LL_push(head, '\0');
-            }
-        }
-        head = head->next;
-    }
-
-    return 0;
-}
-

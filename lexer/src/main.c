@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <scan.h>
 #include <file_io_helpers.h>
+// #include <debug.h> // TODO : Fix include problems
 
 // ORDER OF OPERATIONS:
 // 1. You read a string representing the source code
@@ -8,6 +9,8 @@
 // 3. You munch it to get a DFA pass and get stateful tokens.
 // 4. Print out stateful token on each line
 // 5. Exit
+
+int extern DEBUG;
 
 int
 main(int argc, char *argv[])
@@ -17,27 +20,24 @@ main(int argc, char *argv[])
         perror("Usage: lexer <C source file>\n");
         exit(EXIT_FAILURE);
     }
+
+    // TODO :Debugging switch
+    DEBUG = 1;
+
+    slog("Reading C input...\n");
     int in_sz;
     char *raw = read_file(argv[1], &in_sz);
 
-    LL_CHAR **word_ll;
-    if (split_words(raw, word_ll)) {
-        return 1;
-    }
-  
-    //tokenize(*word_ll, 0x0);
-
-    // TODO : Simple testing splitter
-    /*while ((*word_ll)->next)
-    {
-        if ((*word_ll)->val != '\0') printf("%c", (*word_ll)->val);
-        else printf("\n");
-        *word_ll = (*word_ll)->next; 
-    }
-    printf("\n");*/
-
-    printf("%d\n", iterative_munch(word_ll));
+    slog("Creating a linked-list of C input...\n");
+    LL_CHAR *raw_ll = string_to_ll(raw);
     
+    slog("Running maximal-munch on the linked-list of characters...\n");
+    int final_state = iterative_munch(raw_ll);
+    slog("Final state of maximal-munch: ");
+    ilog(final_state);
+    slog("\n");
+    
+    // TODO : Free LL
     free(raw);
 	return 0;
 }
