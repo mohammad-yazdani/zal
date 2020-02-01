@@ -206,15 +206,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             else
             {
                 switch (in_char)
-                {
-                    case '-':
-                        state_head = LL_push(state_head, MINUS);
-                        slog("-\n");
-                        break;
-                    case '+':
-                        state_head = LL_push(state_head, PLUS);
-                        slog("+\n");
-                        break;
+                { 
                     case '}':
                         state_head = LL_push(state_head, RBRACE);
                         state_head = LL_push(state_head, START);
@@ -245,6 +237,24 @@ munch(STREAM *buffer, LL_CHAR *state_head)
                         state_head = LL_push(state_head, START);
                         slog("(\n");
                         break;
+                    case ',':
+                        state_head = LL_push(state_head, COMMA);
+                        state_head = LL_push(state_head, START);
+                        slog(",\n");
+                        break;
+                    case ';':
+                        state_head = LL_push(state_head, SEMI);
+                        state_head = LL_push(state_head, START);
+                        slog(";\n");
+                        break;
+                    case '-':
+                        state_head = LL_push(state_head, MINUS);
+                        slog("-\n");
+                        break;
+                    case '+':
+                        state_head = LL_push(state_head, PLUS);
+                        slog("+\n");
+                        break;
                     case '=':
                         state_head = LL_push(state_head, BECOMES);
                         slog("=\n");
@@ -272,17 +282,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
                     case '&':
                         state_head = LL_push(state_head, AMP);
                         slog("&\n");
-                        break;
-                    case ',':
-                        state_head = LL_push(state_head, COMMA);
-                        state_head = LL_push(state_head, START);
-                        slog(",\n");
-                        break;
-                    case ';':
-                        state_head = LL_push(state_head, SEMI);
-                        state_head = LL_push(state_head, START);
-                        slog(";\n");
-                        break;
+                        break; 
                     case '/':
                         state_head = LL_push(state_head, COMMENT); // TODO : DIVIDE???
                         /*
