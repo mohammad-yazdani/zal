@@ -377,7 +377,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             else
             {
                 slog("becend\n");
-                return LL_push(state_head, START);
+                return munch(buffer, LL_push(state_head, START));
             }
         case BANG:
             slog("bang -> ");
@@ -523,7 +523,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             slog(") ");
 
             slog("plusend\n");
-            return LL_push(state_head, START);
+            return munch(buffer, LL_push(state_head, START));
         case MINUS:
             slog("minus -> ");
             slog("(");
