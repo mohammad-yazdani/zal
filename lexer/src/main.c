@@ -29,7 +29,7 @@ main(int argc, char *argv[])
     char *raw = read_file(argv[1], &in_sz);
 
     printf("Creating a linked-list of C input...\n");
-    LL_CHAR *raw_ll = string_to_ll(raw);
+    LLNODE *raw_ll = string_to_ll(raw);
     
     printf("Running maximal-munch on the linked-list of characters...\n");
     int final_state = iterative_munch(raw_ll);

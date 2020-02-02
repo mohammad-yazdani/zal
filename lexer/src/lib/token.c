@@ -1,14 +1,15 @@
 #include <token.h>
 
-// TODO : IMPLEMENT
-stateless_token *
-create_token(const char *val, const token_type type)
+TOKEN *create_token(LLNODE *end, int meta)
 {
-	return NULL;
+    TOKEN *newtk = malloc(sizeof(TOKEN));
+    newtk->end = end;
+    newtk->meta = meta;
+    return newtk;
 }
 
-// TODO : IMPLEMENT
-void
-destroy_token(stateless_token *tk)
-{}
+void destroy_token(TOKEN *tk)
+{
+    free(tk);
+}
 

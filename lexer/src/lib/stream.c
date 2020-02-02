@@ -2,7 +2,7 @@
 
 // TODO : Calls malloc
 STREAM *
-create_stream(LL_CHAR* head)
+create_stream(LLNODE* head)
 {
     STREAM *newstream = malloc(sizeof(STREAM));
     newstream->head = head;
@@ -31,5 +31,6 @@ prev(STREAM *s)
 char
 val(STREAM *s)
 {
-    return s->cursor->val;
+    char *vp = s->cursor->data;
+    return *vp;
 }

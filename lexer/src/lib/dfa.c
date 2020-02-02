@@ -6,12 +6,12 @@
 #include <debug.h>
 
 state
-iterative_munch(LL_CHAR *chars)
+iterative_munch(LLNODE *chars)
 {
-    state start_state = START;
-    LL_CHAR *state_head = create_LL_char(start_state);
+    TOKEN *starttk = create_token(NULL, START);
+    LLNODE *state_head = create_LLNODE(starttk);
     STREAM *buffer = create_stream(chars);
-    LL_CHAR *start = state_head;
+    LLNODE *start = state_head;
 
     do
     {
@@ -19,10 +19,11 @@ iterative_munch(LL_CHAR *chars)
     } while (next(buffer));
     
     slog("\n");
-    LL_CHAR *curr = start;
+    LLNODE *curr = start;
     while (curr != NULL)
     {
-        if (curr->val != START) pretty_state(curr->val);
+        TOKEN *currtk = (TOKEN *)(curr->data);
+        if (currtk->meta != START) pretty_state(currtk->meta);
         curr = curr->next;
     }
 
@@ -170,13 +171,29 @@ pretty_state(state s)
     }
 }
 
-LL_CHAR *
-munch(STREAM *buffer, LL_CHAR *state_head)
+LLNODE *
+marktk(LLNODE *state_head, state newstate, LLNODE *endchar)
+{
+    TOKEN *newtk = create_token(endchar, newstate);
+    LLNODE *newchain = LL_push(state_head, newtk);
+    return newchain;
+}
+
+LLNODE *
+endtk(LLNODE *state_head)
+{
+    TOKEN *newtk = create_token(NULL, START);
+    LLNODE *newchain = LL_push(state_head, newtk);
+    return newchain;
+}
+
+LLNODE *
+munch(STREAM *buffer, LLNODE *state_head)
 {
     if (buffer == NULL || state_head == NULL) return NULL;
 
-    char in_char = buffer->cursor->val;
-    state prev = state_head->val;
+    char in_char = *(char *)(buffer->cursor->data);
+    state prev = ((TOKEN *)(state_head->data))->meta;
     switch (prev)
     {
         case START:
@@ -187,17 +204,17 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             if (is_letter(in_char)) 
             {
                 slog("letter\n");
-                state_head = LL_push(state_head, DEF);
+                state_head = marktk(state_head, DEF, buffer->cursor);
             }
             else if (in_char == '0')
             {
                 slog("zero\n");
-                state_head = LL_push(state_head, ZERO);
+                state_head = marktk(state_head, ZERO, buffer->cursor);
             }
             else if (is_digit(in_char))
             {
                 slog("digit\n");
-                state_head = LL_push(state_head, NUM);
+                state_head = marktk(state_head, NUM, buffer->cursor);
             }
             else if (is_whitespace(in_char))
             {
@@ -208,83 +225,83 @@ munch(STREAM *buffer, LL_CHAR *state_head)
                 switch (in_char)
                 { 
                     case '}':
-                        state_head = LL_push(state_head, RBRACE);
-                        state_head = LL_push(state_head, START);
+                        state_head = marktk(state_head, RBRACE, buffer->cursor);
+                        state_head = endtk(state_head);
                         slog("}\n");
                         break;
                     case '{':
-                        state_head = LL_push(state_head, LBRACE);
-                        state_head = LL_push(state_head, START);
+                        state_head = marktk(state_head, LBRACE, buffer->cursor);
+                        state_head = endtk(state_head);
                         slog("{\n");
                         break;
                     case ']':
-                        state_head = LL_push(state_head, RBRACK);
-                        state_head = LL_push(state_head, START);
+                        state_head = marktk(state_head, RBRACK, buffer->cursor);
+                        state_head = endtk(state_head);
                         slog("]\n");
                         break;
                     case '[':
-                        state_head = LL_push(state_head, LBRACK);
-                        state_head = LL_push(state_head, START);
+                        state_head = marktk(state_head, LBRACK, buffer->cursor);
+                        state_head = endtk(state_head);
                         slog("[\n");
                         break;
                     case ')':
-                        state_head = LL_push(state_head, RPAREN);
-                        state_head = LL_push(state_head, START);
+                        state_head = marktk(state_head, RPAREN, buffer->cursor);
+                        state_head = endtk(state_head);
                         slog(")\n");
                         break;
                     case '(':
-                        state_head = LL_push(state_head, LPAREN);
-                        state_head = LL_push(state_head, START);
+                        state_head = marktk(state_head, LPAREN, buffer->cursor);
+                        state_head = endtk(state_head);
                         slog("(\n");
                         break;
                     case ',':
-                        state_head = LL_push(state_head, COMMA);
-                        state_head = LL_push(state_head, START);
+                        state_head = marktk(state_head, COMMA, buffer->cursor);
+                        state_head = endtk(state_head);
                         slog(",\n");
                         break;
                     case ';':
-                        state_head = LL_push(state_head, SEMI);
-                        state_head = LL_push(state_head, START);
+                        state_head = marktk(state_head, SEMI, buffer->cursor);
+                        state_head = endtk(state_head);
                         slog(";\n");
                         break;
                     case '-':
-                        state_head = LL_push(state_head, MINUS);
+                        state_head = marktk(state_head, MINUS, buffer->cursor);
                         slog("-\n");
                         break;
                     case '+':
-                        state_head = LL_push(state_head, PLUS);
+                        state_head = marktk(state_head, PLUS, buffer->cursor);
                         slog("+\n");
                         break;
                     case '=':
-                        state_head = LL_push(state_head, BECOMES);
+                        state_head = marktk(state_head, BECOMES, buffer->cursor);
                         slog("=\n");
                         break;
                     case '!':
-                        state_head = LL_push(state_head, BANG);
+                        state_head = marktk(state_head, BANG, buffer->cursor);
                         slog("!\n");
                         break;
                     case '<':
-                        state_head = LL_push(state_head, LE);
+                        state_head = marktk(state_head, LE, buffer->cursor);
                         slog("<\n");
                         break;
                     case '>':
-                        state_head = LL_push(state_head, GE);
+                        state_head = marktk(state_head, GE, buffer->cursor);
                         slog(">\n");
                         break;
                     case '*':
-                        state_head = LL_push(state_head, STAR);
+                        state_head = marktk(state_head, STAR, buffer->cursor);
                         slog("*\n");
                         break;
                     case '%':
-                        state_head = LL_push(state_head, PCT);
+                        state_head = marktk(state_head, PCT, buffer->cursor);
                         slog("%\n");
                         break;
                     case '&':
-                        state_head = LL_push(state_head, AMP);
+                        state_head = marktk(state_head, AMP, buffer->cursor);
                         slog("&\n");
                         break; 
                     case '/':
-                        state_head = LL_push(state_head, COMMENT); // TODO : DIVIDE???
+                        state_head = marktk(state_head, COMMENT, buffer->cursor); // TODO : DIVIDE???
                         /*
                         if next is / then go to comment state, otherwise its a divide if
                         next is letter or digit
@@ -300,7 +317,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             {
                 return NULL;
             }
-            chlog(buffer->cursor->val);
+            chlog(*(char *)(buffer->cursor->data));
             slog("\n");
             return munch(buffer, state_head);
         case ZERO:
@@ -317,7 +334,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             else // TODO : CHANGE to recursive
             {
                 slog("RECURSIVE:\n");
-                return munch(buffer, LL_push(state_head, START));
+                return munch(buffer, endtk(state_head));
             }
         case DEF:
             slog("def -> ");
@@ -334,12 +351,12 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             else if (is_whitespace(in_char))
             {
                 slog("enddef\n");
-                return LL_push(state_head, START);
+                return endtk(state_head);
             }
             else
             {
                 slog("RECURSIVE:\n");
-                return munch(buffer, LL_push(state_head, START));
+                return munch(buffer, endtk(state_head));
             }
         case NUM:
             slog("num -> ");
@@ -361,7 +378,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             else
             {
                 slog("numend\n");
-                return munch(buffer, LL_push(state_head, START));
+                return munch(buffer, endtk(state_head));
             }
         case BECOMES:
             slog("becomes -> ");
@@ -372,12 +389,12 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             if (in_char == '=')
             {
                 slog("=\n");
-                return munch(buffer, LL_push(state_head, EQ));
+                return munch(buffer, marktk(state_head, EQ, buffer->cursor));
             }
             else
             {
                 slog("becend\n");
-                return munch(buffer, LL_push(state_head, START));
+                return munch(buffer, endtk(state_head));
             }
         case BANG:
             slog("bang -> ");
@@ -388,9 +405,9 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             if (in_char == '=')
             {
                 slog("=\n");
-                return munch(buffer, LL_push(state_head, NE));
+                return munch(buffer, marktk(state_head, NE, buffer->cursor));
             }
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case LT:
             slog("lt -> ");
             slog("(");
@@ -400,9 +417,9 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             if (in_char == '=')
             {
                 slog("=\n");
-                return munch(buffer, LL_push(state_head, LE));
+                return munch(buffer, marktk(state_head, LE, buffer->cursor));
             }
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case GT:
             slog("gt -> ");
             slog("(");
@@ -412,9 +429,9 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             if (in_char == '=')
             {
                 slog("=\n");
-                return munch(buffer, LL_push(state_head, GE));
+                return munch(buffer, marktk(state_head, GE, buffer->cursor));
             }
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case EQ:
             slog("eq -> ");
             slog("(");
@@ -426,7 +443,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
                 slog("sym (invalid)\n");
                 return NULL;
             }
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case NE:
             slog("ne -> ");
             slog("(");
@@ -438,7 +455,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
                 slog("sym (invalid)\n");
                 return NULL;
             }
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case LE:
             slog("le -> ");
             slog("(");
@@ -450,7 +467,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
                 slog("sym (invalid)\n");
                 return NULL;
             }
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case GE:
             slog("ge -> ");
             slog("(");
@@ -462,7 +479,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
                 slog("sym (invalid)\n");
                 return NULL;
             }
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case COMMENT:
             slog("comment -> ");
             slog("(");
@@ -474,7 +491,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
                 slog("comment\n");
                 return NULL;
             }
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case WHITESPACE:
             slog("wspace -> ");
             slog("(");
@@ -487,7 +504,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
                 next(buffer);
                 return munch(buffer, state_head);
             }*/
-            return LL_push(state_head, START);
+            return endtk(state_head);
         // TODO : case STAR
         case STAR:
             slog("star -> ");
@@ -499,7 +516,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             {
                 return NULL;
             }
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case RBRACK:
             slog("rbrack -> ");
             slog("(");
@@ -507,7 +524,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             slog(") ");
 
             slog("ctd\n");
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case LBRACK:
             slog("lbrack -> ");
             slog("(");
@@ -515,7 +532,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             slog(") ");
 
             slog("ctd\n");
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case PLUS:
             slog("plus -> ");
             slog("(");
@@ -523,7 +540,7 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             slog(") ");
 
             slog("plusend\n");
-            return munch(buffer, LL_push(state_head, START));
+            return munch(buffer, endtk(state_head));
         case MINUS:
             slog("minus -> ");
             slog("(");
@@ -531,14 +548,14 @@ munch(STREAM *buffer, LL_CHAR *state_head)
             slog(") ");
 
             slog("minudend\n");
-            return LL_push(state_head, START);
+            return endtk(state_head);
         case SEMI:
             slog("statement\n");
             slog("(");
             chlog(in_char);
             slog(") ");
 
-            return LL_push(state_head, START);
+            return endtk(state_head);
         default:
             slog("default1 ");
             slog("(");

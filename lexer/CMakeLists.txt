@@ -10,16 +10,14 @@ include_directories(src/shared/file_io)
 include_directories(src/shared/str)
 
 add_executable(lexer
-		src/lib/token.c
-        src/lib/scan.c
+        src/lib/linked_list.c
         src/lib/stream.c
         src/main.c
         src/shared/file_io/file_io_helpers.c
         src/lib/dfa.c
-        src/shared/str/str_helper.c 
-        # src/lib/maximal_munch.c 
-        src/include/scan.h
-        src/include/stream.h)
+        src/shared/str/str_helper.c
+        src/lib/token.c
+        )
 
 enable_testing()
 

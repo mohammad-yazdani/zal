@@ -1,12 +1,12 @@
-#include <scan.h>
+#include <linked_list.h>
 
 typedef struct stream
 {
-    LL_CHAR *head;
-    LL_CHAR *cursor;
+    LLNODE *head;
+    LLNODE *cursor;
 } STREAM;
 
-STREAM *create_stream(LL_CHAR* head);
+STREAM *create_stream(LLNODE* head);
 int next(STREAM *s);
 int prev(STREAM *s);
 char val(STREAM *s);

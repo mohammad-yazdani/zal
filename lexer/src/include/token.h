@@ -1,22 +1,13 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <linked_list.h>
 
 // This header defines the data-structures describing the tokens of MIN_C.
 
-typedef enum TOKEN_TYPE {
-    KEYWORD,
-    ID,
-    CONST,
-    STRING,
-    SYMBOL,
-    OPERATOR
-} token_type;
+typedef struct token {
+    LLNODE *end;
+    int meta;
+} TOKEN;
 
-typedef struct STATELESS_TOKEN {
-	const token_type tk_type;
-	const char *tk_val;
-} stateless_token;
-
-stateless_token *create_token(const char *val, token_type type);
-void destroy_token(stateless_token *tk);
+TOKEN *create_token(LLNODE *end, int meta);
+void destroy_token(TOKEN *tk);
 
