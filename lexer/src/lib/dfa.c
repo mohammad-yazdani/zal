@@ -5,7 +5,7 @@
 #include <dfa.h>
 #include <debug.h>
 
-state
+LLNODE *
 iterative_munch(LLNODE *chars)
 {
     TOKEN *starttk = create_token(NULL, START);
@@ -16,158 +16,105 @@ iterative_munch(LLNODE *chars)
     do
     {
         state_head = munch(buffer, state_head);
-    } while (next(buffer));
-    
-    slog("\n");
-    LLNODE *curr = start;
-    while (curr != NULL)
-    {
-        TOKEN *currtk = (TOKEN *)(curr->data);
-        if (currtk->meta != START) pretty_state(currtk->meta);
-        curr = curr->next;
-    }
+    } while (next(buffer)); 
 
-    // return curr->val == INVALID; // TODO : FIX!!!
-    return 0;
+    return start;
 }
 
-void
+const char*
 pretty_state(state s)
 {
     switch (s)
     {
         case START:
-            slog("START\n");
-            break;
+            return "START";
         case UNDEFINED:
-            slog("UNDEFINED\n");
-            break;
+            return "UNDEFINED";
         case INVALID:
-            slog("INVALID\n");
-            break;
+            return "INVALID";
         case SPACE:
-            slog("SPACE\n");
-            break;
+            return "SPACE";
         case TAB:
-            slog("TAB\n");
-            break;
+            return "TAB";
         case NEWLINE:
-            slog("NEWLINE\n");
-            break;
+            return "NEWLINE";
         case COMMENT:
-            slog("COMMENT\n");
-            break;
+            return "COMMENT";
         case WHITESPACE:
-            slog("WHITESPACE\n");
-            break;
+            return "WHITESPACE";
         case DEF:
-            slog("DEF\n");
-            break;
+            return "DEF";
         case NUM:
-            slog("NUM\n");
-            break;
+            return "NUM";
         case LPAREN:
-            slog("LPAREN\n");
-            break;
+            return "LPAREN";
         case RPAREN:
-            slog("RPAREN\n");
-            break;
+            return "RPAREN";
         case LBRACE:
-            slog("LBRACE\n");
-            break;
+            return "LBRACE";
         case RBRACE:
-            slog("RBRACE\n");
-            break;
+            return "RBRACE";
         case RETURN:
-            slog("RETURN\n");
-            break;
+            return "RETURN";
         case IF:
-            slog("IF\n");
-            break;
+            return "IF";
         case ELSE:
-            slog("ELSE\n");
-            break;
+            return "ELSE";
         case WHILE:
-            slog("WHILE\n");
-            break;
+            return "WHILE";
         case PRINTLN:
-            slog("PRINTLN\n");
-            break;
+            return "PRINTLN";
         case MAIN:
-            slog("MAIN\n");
-            break;
+            return "MAIN";
         case BECOMES:
-            slog("BECOMES\n");
-            break;
+            return "BECOMES";
         case INT:
-            slog("INT\n");
-            break;
+            return "INT";
         case EQ:
-            slog("EQ\n");
-            break;
+            return "EQ";
         case NE:
-            slog("NE\n");
-            break;
+            return "NE";
         case LT:
-            slog("LT\n");
-            break;
+            return "LT";
         case GT:
-            slog("GT\n");
-            break;
+            return "GT";
         case LE:
-            slog("LE\n");
+            return "LE";
             break;
         case GE:
-            slog("GE\n");
-            break;
+            return "GE";
         case PLUS:
-            slog("PLUS\n");
-            break;
+            return "PLUS";
         case MINUS:
-            slog("MINUS\n");
-            break;
+            return "MINUS";
         case STAR:
-            slog("STAR\n");
-            break;
+            return "STAR";
         case SLASH:
-            slog("SLASH\n");
-            break;
+            return "SLASH";
         case PCT:
-            slog("PCT\n");
-            break;
+            return "PCT";
         case COMMA:
-            slog("COMMA\n");
-            break;
+            return "COMMA";
         case SEMI:
-            slog("SEMI\n");
-            break;
+            return "SEMI";
         case NEW:
-            slog("NEW\n");
-            break;
+            return "NEW";
         case DELETE:
-            slog("DELETE\n");
-            break;
+            return "DELETE";
         case LBRACK:
-            slog("LBRACK\n");
-            break;
+            return "LBRACK";
         case RBRACK:
-            slog("RBRACK\n");
-            break;
+            return "RBRACK";
         case AMP:
-            slog("AMP\n");
-            break;
+            return "AMP";
         case NULLL:
-            slog("NULLL\n");
-            break;
+            return "NULLL";
         case ZERO:
-            slog("ZERO\n");
-            break;
+            return "ZERO";
         case BANG:
-            slog("BANG\n");
-            break;
+            return "BANG";
         default:
-            slog("default\n");
-            break;
+            return "default";
     }
 }
 
@@ -566,5 +513,12 @@ munch(STREAM *buffer, LLNODE *state_head)
             slog("\n");
             return NULL;
     }
+}
+
+
+void
+slog_wrapper(const char *msg)
+{
+    slog((char *)msg);
 }
 

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <file_io_helpers.h>
 #include <dfa.h>
+
 // #include <debug.h> // TODO : Fix include problems
 
 // ORDER OF OPERATIONS:
@@ -20,21 +21,33 @@ main(int argc, char *argv[])
         perror("Usage: lexer <C source file>\n");
         exit(EXIT_FAILURE);
     }
+    if (argc == 3)
+    {
+        // TODO : Pass 'd' as second arg to turn on debug
+        if (argv[2][0] == 'd') DEBUG = 1;
+    }
 
-    // TODO :Debugging switch
-    DEBUG = 1;
-
-    printf("Reading C input...\n");
+    slog_wrapper("Reading C input...\n");
     int in_sz;
     char *raw = read_file(argv[1], &in_sz);
 
-    printf("Creating a linked-list of C input...\n");
+    slog_wrapper("Creating a linked-list of C input...\n");
     LLNODE *raw_ll = string_to_ll(raw);
     
-    printf("Running maximal-munch on the linked-list of characters...\n");
-    int final_state = iterative_munch(raw_ll);
-    printf("Final state of maximal-munch: %d\n", final_state);
-    
+    slog_wrapper("Running maximal-munch on the linked-list of characters...\n");
+    LLNODE *states = iterative_munch(raw_ll);
+    slog_wrapper("Lex done!\n\n");
+
+    LLNODE *curr = states;
+    while (curr != NULL)
+    {
+        TOKEN *currtk = (TOKEN *)(curr->data);
+        if (currtk->meta != START) printf("%s\n", pretty_state(currtk->meta));
+        curr = curr->next;
+    }
+
+    curr = identify(curr);
+
     // TODO : Free LL
     free(raw);
 	return 0;

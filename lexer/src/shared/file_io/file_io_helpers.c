@@ -32,3 +32,13 @@ read_file(char * file_name, int *sz)
     *sz = idx;
     return out_buff;
 }
+
+int
+write_file(const char *path, const char *buffer)
+{
+    FILE *fp = fopen(path, "ab+");
+    int cw = fputs(buffer, fp);
+    fclose(fp);
+    return cw;
+}
+

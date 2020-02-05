@@ -50,15 +50,18 @@ typedef enum STATE {
 } state;
 
 // This basically takes a char with prev state and sees if what you're doing makes sense.
-LLNODE* munch(STREAM* buffer, LLNODE* state_head);
+LLNODE* munch(STREAM *buffer, LLNODE *state_head);
 
 // Maximal munch over a linked list
-state iterative_munch(LLNODE *chars);
+LLNODE* iterative_munch(LLNODE *chars);
 
 // TODO : Confusing :(
 // This calls `munch` on a string to get words out
 // stateful_token *maximal_munch(const stateless_token *tk);
 
 // Helpers
-void pretty_state(state s);
+const char* pretty_state(state s);
+
+// TODO : TEMPORARY
+void slog_wrapper(const char *msg);
 

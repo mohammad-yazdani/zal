@@ -9,6 +9,9 @@
 #include <stdio.h>
 
 char *
-read_file(char * file_name, int *sz);
+read_file(char *file_name, int *sz);
+
+int
+write_file(const char *path, const char *buffer);
 
 #endif //SCAN_FILE_IO_HELPERS_H
